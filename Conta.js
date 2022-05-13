@@ -23,12 +23,17 @@ export class Conta{
     }
 
     sacar(valor){
-        let taxa = 1
+        let taxa = 1 //o que pode modificar
+        return this._sacar(valor,taxa)
+    }
+
+    _sacar(valor,taxa){ //método privado, que vai se manter igual para as classes filhas - usado pelo método com mesmo nome
         const valorSacado = taxa * valor
         if(this._saldo >= valorSacado){
             this._saldo -= valorSacado;
             return valorSacado;
         }
+        return 0
     }
 
     depositar(valor){
