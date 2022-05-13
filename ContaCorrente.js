@@ -1,49 +1,54 @@
 import { Cliente } from "./Cliente.js";
 
 export class ContaCorrente{
+    static numeroDeContas = 0;
     agencia;
-    _saldo = 0;
-    //estão estudando de usar #saldo para privados
     _cliente;
-
-
-    //setters
-    set cliente(novoValor){
-        if (novoValor instanceof Cliente){
-            this._cliente = novoValor 
-        }
-    }
-
-    //getters
-    get cliente(){
-        return this._cliente
-    }
-
-    // evita que apessoa atribua um valor tentando fazer "conta.saldo = 5000", só se tiver um setter
-    get saldo(){
-        return this._saldo
-    }
+   // #saldo =0 https://github.com/tc39/proposal-class-fields#private-fields
+   _saldo = 0;
     
 
-    //métodos
-    sacar(valor){
-        if(valor <= this._saldo){
-            this._saldo -= valor
-            return valor
+
+    set cliente(novoValor){
+        if(novoValor instanceof Cliente){
+            this._cliente = novoValor;
         }
     }
-    depositar(valor){
-        if(valor<0) return
-        //early return: se estiver errado nem segue
 
-        this._saldo += valor
+    get cliente(){
+        return this._cliente;
     }
-                //copia //referencia
-    transferir(valor,conta){
-        conta.ativo = true //esse parametro não existe já em conta, é criado dinamicamente quando chama essa função
-        const valorSacado = this.sacar(valor)
-        conta.depositar(valorSacado)
-        //se modificar o valor aqui dentro, não modifica lá fora.
-        //se modificar a conta, como é referência, isso modifica fora também
+
+    get saldo(){
+        return this._saldo;
+    }
+
+    constructor(agencia, cliente){
+        this.agencia = agencia;
+        this.cliente = cliente;
+        ContaCorrente.numeroDeContas += 1;
+    }
+
+
+    sacar(valor){
+        if(this._saldo >= valor){
+            this._saldo -= valor;
+            return valor;
+        }
+    }
+
+    depositar(valor){
+        if(valor <= 0)
+        {
+            return;
+        } 
+        this._saldo += valor;           
+    }
+
+    tranferir(valor, conta){
+        
+        const valorSacado = this.sacar(valor);
+        conta.depositar(valorSacado);
+        
     }
 }

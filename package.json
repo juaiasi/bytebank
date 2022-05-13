@@ -1,22 +1,12 @@
 {
   "name": "bytebank",
   "version": "1.0.0",
+  "description": "Projeto do bytebank para seus clientes",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index.js"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/juaiasi/bytebank.git"
-  },
-  "keywords": [],
   "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/juaiasi/bytebank/issues"
-  },
-  "homepage": "https://github.com/juaiasi/bytebank#readme",
-  "type": "module",
-  "description": ""
+  "type": "module"
 }
